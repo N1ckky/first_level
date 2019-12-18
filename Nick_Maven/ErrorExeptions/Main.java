@@ -84,21 +84,21 @@ public class Main {
         //    Посчитать средний балл по всем предметам студента
         int fooGrade = -666;
         INNER:
-        for (int i = 0; i < studentsArray.length; i++) {
-            for (int j = 0; j < studentsArray[i].subject.length; j++) {
-                if (studentsArray[i].subject[j].getNameSubject().equals(stringForCheckIfStudendHaveUnnamedField) ||
-                        studentsArray[i].subject[j].getGrade() == fooGrade) {
+        for (Student student : studentsArray) {
+            for (int j = 0; j < student.subject.length; j++) {
+                if (student.subject[j].getNameSubject().equals(stringForCheckIfStudendHaveUnnamedField) ||
+                        student.subject[j].getGrade() == fooGrade) {
                     continue INNER;
                 }
             }
-            if (studentsArray[i].getStudentName().equals(stringForCheckIfStudendHaveUnnamedField) ||
-                    studentsArray[i].getGroupName().equals(stringForCheckIfStudendHaveUnnamedField) ||
-                    studentsArray[i].getFacultyName().equals(stringForCheckIfStudendHaveUnnamedField)) {
+            if (student.getStudentName().equals(stringForCheckIfStudendHaveUnnamedField) ||
+                    student.getGroupName().equals(stringForCheckIfStudendHaveUnnamedField) ||
+                    student.getFacultyName().equals(stringForCheckIfStudendHaveUnnamedField)) {
                 continue;
             }
             System.out.println("Average grades for All subjects for | "
-                    + studentsArray[i].getStudentName() + ": " + studentsArray[i].getAllSubjectsAverageGrade() + ", From "
-                    + studentsArray[i].getFacultyName() + ", group " + studentsArray[i].getGroupName());
+                    + student.getStudentName() + ": " + student.getAllSubjectsAverageGrade() + ", From "
+                    + student.getFacultyName() + ", group " + student.getGroupName());
         }
 
         System.out.println(dash);
@@ -106,17 +106,18 @@ public class Main {
 
         //    Посчитать средний балл по конкретному предмету в конкретной группе и на конкретном факультете
         double sumGrades = 0;
+        double averageGrade = 0;
         int countGrades = 0;
 
-        for (int i = 0; i < studentsArray.length; i++) {
-            if (studentsArray[i].getSubjectGroupFacultyAverageGradeStudent(nameSortConditionSubject, nameSortConditionGroup, nameSortConditionFaculty) >= 0) {
-                sumGrades += studentsArray[i].getSubjectGroupFacultyAverageGradeStudent(nameSortConditionSubject, nameSortConditionGroup,
+        for (Student student1 : studentsArray) {
+            if (student1.getSubjectGroupFacultyAverageGradeStudent(nameSortConditionSubject, nameSortConditionGroup, nameSortConditionFaculty) >= 0) {
+                sumGrades += student1.getSubjectGroupFacultyAverageGradeStudent(nameSortConditionSubject, nameSortConditionGroup,
                         nameSortConditionFaculty);
                 countGrades += 1;
-            } else i++;
+            }
         }
-
-        double averageGrade = sumGrades / countGrades;
+        if (countGrades != 0)
+            averageGrade = sumGrades / countGrades;
         System.out.println("Average rating for the subject: " + nameSortConditionSubject + ", in Group: " + nameSortConditionGroup
                 + ", at the Faculty: " + nameSortConditionFaculty);
         System.out.println(dash + averageGrade + dash);
@@ -126,11 +127,11 @@ public class Main {
         //    Посчитать средний балл по предмету для всего университета
         sumGrades = 0;
         countGrades = 0;
-        for (int i = 0; i < studentsArray.length; i++) {
-            if (studentsArray[i].getUniversityAverageGradeStudent(nameSortConditionSubject) >= 0) {
-                sumGrades += studentsArray[i].getUniversityAverageGradeStudent(nameSortConditionSubject);
+        for (Student student : studentsArray) {
+            if (student.getSubjectAverageGradeStudent(nameSortConditionSubject) >= 0) {
+                sumGrades += student.getSubjectAverageGradeStudent(nameSortConditionSubject);
                 countGrades += 1;
-            } else i++;
+            }
         }
         if (countGrades != 0)
             averageGrade = sumGrades / countGrades;

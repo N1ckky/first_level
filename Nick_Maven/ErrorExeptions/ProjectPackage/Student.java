@@ -109,7 +109,7 @@ public class Student extends Group {
         }
     }
 
-    public double getUniversityAverageGradeStudent(String nameSubject) {
+    public double getSubjectAverageGradeStudent(String nameSubject) {
         try {
             double sumGrades = 0;
             int countGrades = 0;
