@@ -1,5 +1,7 @@
 package Nick_Maven.ErrorExeptions.ProjectPackage;
 
+import Nick_Maven.ErrorExeptions.ExceptionsPackage.MyExceptions.*;
+
 public class Student extends Group {
     public Subject[] subject;
     private String studentName;
@@ -33,34 +35,6 @@ public class Student extends Group {
             if (this.getFacultyName().length() < 1) throw new FacultyNameException("Every student must have the faculty! I skip him");
         } catch (FacultyNameException ex4) {
             this.setFacultyName("UNNAMED");
-        }
-    }
-
-    class StudentNameException extends Exception {
-        public StudentNameException(String message) {
-            super(message);
-            System.out.println(message);
-        }
-    }
-
-    class SubjectCountException extends Exception {
-        public SubjectCountException(String message) {
-            super(message);
-            System.out.println(message);
-        }
-    }
-
-    class GroupNameException extends Exception {
-        public GroupNameException(String message) {
-            super(message);
-            System.out.println(message);
-        }
-    }
-
-    class FacultyNameException extends Exception {
-        public FacultyNameException(String message) {
-            super(message);
-            System.out.println(message);
         }
     }
 
