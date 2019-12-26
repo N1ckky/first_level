@@ -1,59 +1,7 @@
-HIM
-|-----02-Greatest Lovesongs vol. 666 (1998)
-	|     01-Your Sweet Six Six Six.txt
-	|     02-Wicked Game.txt
-	|     03-The Heartless.txt
-	|     04-Our Diabolikal Rapture.txt
-	|     05-It's All Tears [Drown In This Love].txt
-	|     06-When Love And Death Embrace.txt
-	|     07-The Beginning Of The End.txt
-	|     08-[Don't Fear] The Reaper.txt
-	|     09-For You.txt
-	|     
-	|-----2003 - Love Metal
-		|     01 Song.txt
-		|     02 Song.txt
-		|     03 Song.txt
-		|     04 Song.txt
-		|     05 Song.txt
-		|     06 Song.txt
-		|     07 Song.txt
+TestFolder
+|     Main.txt
+|     Main12345678.txt
 |     
-|-----02-Razorblade Romance [Digipak] (2000)
-	|     01-I Love You [Prelude To Tragedy].txt
-	|     02-Poison Girl.txt
-	|     03-Join Me In Death.txt
-	|     04-Right Here In My Arms.txt
-	|     05-Gone With The Sin.txt
-	|     06-Razorblade Kiss.txt
-	|     07-Bury Me Deep Inside Your Heart.txt
-	|     08-Heaven Tonight.txt
-	|     09-Death Is In Love With You.txt
-|     
-|-----2003 - Love Metal
-	|     01 - Buried Alive By Love.txt
-	|     02 - The Funeral of Hearts.txt
-	|     03 - Beyond Redemption.txt
-	|     05 - Soul on Fire.txt
-	|     06 - The Sacrament.txt
-	|     09 - Endless Dark.txt
-	|     10 - The Path.txt
-	|     11 - Love's Requiem.txt
-	|     Under the Rose H.I.M Dark Light 03 Rock 320kbps.txt
-|     
-|-----2006 - Dark Light
-	|     AlbumArtSmall.jpg
-	|     AlbumArt_{7A60A72E-18A6-4EE7-B640-F9C07DDF3F93}_Large.jpg
-	|     AlbumArt_{7A60A72E-18A6-4EE7-B640-F9C07DDF3F93}_Small.jpg
-	|     Behind the Crimson Door H.I.M Dark Light 06 Rock 320kbps.txt
-	|     Dark Light H.I.M Dark Light 05 Rock 320kbps.txt
-	|     desktop.ini
-	|     Drunk on Shadows H.I.M Dark Light 08 Rock 320kbps.txt
-	|     Folder.jpg
-	|     In the Nightside of Eden H.I.M Dark Light 10 Rock 320kbps.txt
-	|     Killing Loneliness H.I.M Dark Light 04 Rock 320kbps.txt
-	|     Play Dead H.I.M Dark Light 09 Rock 320kbps.txt
-	|     Rip Out the Wings of a Butterfly H.I.M Dark Light 02 Rock 320kbps.txt
-	|     The Face of God H.I.M Dark Light 07 Rock 320kbps.txt
-	|     Under the Rose H.I.M Dark Light 03 Rock 320kbps.txt
-|     desktop.ini
+|-----NewFolder
+	|     Main.txt
+	|     Main12345678.txt
