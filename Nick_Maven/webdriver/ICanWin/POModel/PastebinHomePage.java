@@ -63,29 +63,4 @@ public class PastebinHomePage {
         createNewPasteBtn.click();
         return new PastebinCreatedPastePage(driver, textForPaste,pasteTitle);
     }
-
-
-//    public static void main(String[] args) throws InterruptedException {
-//
-//        WebDriver driver = new ChromeDriver();
-//        driver.get("https://pastebin.com/");
-//        WebElement newPasteField = driver.findElement(By.id("paste_code"));
-//
-//        newPasteField.sendKeys("Hello from WebDriver");
-//
-//        WebElement pastExpirationField = driver.findElement(By.xpath("//span[@class='select2-selection__rendered' and contains(@id, 'select2-paste_expire_date')]"));
-//        pastExpirationField.click();
-//
-//        WebElement select10Min = driver.findElement(By.xpath("//*[@class='select2-results__option' and text()='10 Minutes']"));
-//        select10Min.click();
-//
-//        WebElement postName = driver.findElement(By.name("paste_name"));
-//        postName.sendKeys("helloweb");
-//
-//        WebElement createNewPasteBtn = driver.findElement(By.xpath("//input[@type='submit' and @value='Create New Paste']"));
-//        createNewPasteBtn.click();
-//
-//        Thread.sleep(2500);
-//        //driver.quit();
-//    }
 }
