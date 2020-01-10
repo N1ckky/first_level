@@ -16,7 +16,7 @@ public class BringItOn {
         driver = new ChromeDriver();
     }
 
-    @Test(description = "JIRA binding can be here")
+    @Test(description = "pastebin.com test with optional paste settings")
     public void createNewPasteBringItOnTaskTest() {
         boolean newPasteCreatedTest = new PastebinHomePage(driver)
                 .openPage()

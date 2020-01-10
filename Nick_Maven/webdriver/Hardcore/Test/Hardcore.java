@@ -22,15 +22,15 @@ public class Hardcore {
         driver = new ChromeDriver();
     }
 
-    @Test(description = "JIRA binding can be here")
-    public void createEmailReceivationTotalAmountTest() {
+    @Test(description = "Google cloud calculator and email estimate test")
+    public void createEmailReceptionTotalAmountTest() {
         ArrayList<String> tempList = new ArrayList<>();
         BrowserParams browser = new BrowserParams(driver);
 
         CloudGooglePlatformPricingCalculatorPage cloudGooglePricingCalculatorTest = new CloudGoogleHomePage(driver)
                 .openPage()
                 .makeSearch("Google Cloud Platform Pricing Calculator")
-                .choseSearchResult()
+                .chooseSearchResult()
                 .selectComputeEngineSection()
                 .setNumberOfInstances()
                 .selectOSAndSoftware()
@@ -42,8 +42,7 @@ public class Hardcore {
                 .selectCommittedUsage()
                 .clickButtonAddToEstimate()
                 .addToListTotalAmountPrice(tempList)
-                .clickButtonEmailEstimate()
-                ;
+                .clickButtonEmailEstimate();
 
         browser.openNewTab().switchNextTab();
 

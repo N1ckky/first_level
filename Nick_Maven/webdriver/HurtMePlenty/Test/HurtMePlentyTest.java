@@ -17,12 +17,12 @@ public class HurtMePlentyTest {
         driver = new ChromeDriver();
     }
 
-    @Test(description = "JIRA binding can be here")
-    public void createNewPasteICanWinTaskTest() {
+    @Test(description = "Google cloud calculator")
+    public void cloudGoogleSelectedOptionTest() {
         boolean newCloudGooglePlatformPricingCalculatorTest = new CloudGoogleHomePage(driver)
                 .openPage()
                 .makeSearch("Google Cloud Platform Pricing Calculator")
-                .choseSearchResult()
+                .chooseSearchResult()
                 .selectComputeEngineSection()
                 .setNumberOfInstances()
                 .selectOSAndSoftware()

@@ -16,7 +16,7 @@ public class ICanWinTest {
         driver = new ChromeDriver();
     }
 
-    @Test(description = "JIRA binding can be here")
+    @Test(description = "pastebin.com \"Hello from WebDriver\" test")
     public void createNewPasteICanWinTaskTest() {
         boolean newPasteCreatedTest = new PastebinHomePage(driver)
                 .openPage()

@@ -17,12 +17,12 @@ public class CloudGoogleSearchPage {
     }
 
     @FindBy(xpath = "//*[@class='gs-title' and @href='https://cloud.google.com/products/calculator/']")
-    private WebElement choseSearchLink;
+    private WebElement chooseSearchLink;
 
-    public CloudGooglePlatformPricingCalculatorPage choseSearchResult() {
+    public CloudGooglePlatformPricingCalculatorPage chooseSearchResult() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(CustomConditions.jQueryAJAXCallsHaveCompleted());
-        choseSearchLink.click();
+        chooseSearchLink.click();
         return new CloudGooglePlatformPricingCalculatorPage(driver);
     }
 

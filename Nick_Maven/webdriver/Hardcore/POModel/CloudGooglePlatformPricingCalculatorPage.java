@@ -15,37 +15,32 @@ import java.util.List;
 public class CloudGooglePlatformPricingCalculatorPage {
     private WebDriver driver;
     public static final int WAIT_TIMEOUT_SECONDS = 10;
-    private boolean checkFlag = false;
-
-    private static final String EXPECTED_VM_CLASS = "regular";
-    private static final String EXPECTED_INSTANCE = "n1-standard-8";
-    private static final String EXPECTED_REGION = "Frankfurt";
-    private static final String EXPECTED_LOCAL_SSD = "2x375 GB";
-    private static final String EXPECTED_COMMITMENT_TERM = "1 Year";
-    private static final String EXPECTED_TOTAL_PRICE = "1,082.77";
-
     private static WebElement IFRAME;
 
-    @FindBy(xpath = "//*[@class='presets-buttons layout-sm-column layout-align-center-center layout-column']")
+    private static final String JS_CLICK = "arguments[0].click();";
+    private static final String TAG_IFRAME = "iframe";
+    private static final String NUMBER_OF_INSTANCES = "4";
+
+    @FindBy(xpath = "//*[contains(@class,'presets-buttons')]")
     private List<WebElement> computeEngineSection;
 
     @FindBy(xpath = "//input[@name='quantity' and @ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstancesField;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_47']")
-    private WebElement choseOSAndSoftwareField;
+    private WebElement chooseOSAndSoftwareField;
 
     @FindBy(xpath = "//div[@id='select_container_67']//child::md-option")
     private List<WebElement> listOfOSAndSoftware;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_48']")
-    private WebElement choseMachineClassField;
+    private WebElement chooseMachineClassField;
 
     @FindBy(xpath = "//div[@id='select_container_71']//child::md-option")
     private List<WebElement> listOfMachineClass;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_51']")
-    private WebElement choseMachineTypeField;
+    private WebElement chooseMachineTypeField;
 
     @FindBy(xpath = "//md-optgroup[@label='standard']//child::md-option")
     private List<WebElement> listOfMachineType;
@@ -89,7 +84,7 @@ public class CloudGooglePlatformPricingCalculatorPage {
     @FindBy(xpath = "//md-card-content[@id='resultBlock']//child::md-list-item")
     private List<WebElement> listOfEstimate;
 
-    @FindBy(xpath = "//button[@aria-label= 'Email Estimate']")
+    @FindBy(xpath = "//button[@aria-label='Email Estimate']")
     private WebElement buttonEmailEstimate;
 
     @FindBy(xpath = "//label[text()='Email ']")
@@ -100,11 +95,6 @@ public class CloudGooglePlatformPricingCalculatorPage {
 
     @FindBy(xpath = "//button[@type= 'button' and @aria-label='Send Email']")
     private WebElement buttonSendEmail;
-
-
-    private static final String JS_CLICK = "arguments[0].click();";
-    private static final String TAG_IFRAME = "iframe";
-    private static final String NUMBER_OF_INSTANCES = "4";
 
 
     CloudGooglePlatformPricingCalculatorPage(WebDriver driver) {
@@ -127,20 +117,20 @@ public class CloudGooglePlatformPricingCalculatorPage {
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectOSAndSoftware() {
-        ((JavascriptExecutor) driver).executeScript(JS_CLICK, choseOSAndSoftwareField);
+        ((JavascriptExecutor) driver).executeScript(JS_CLICK, chooseOSAndSoftwareField);
         listOfOSAndSoftware.get(0).click();
         return this;
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectMachineClass() {
-        ((JavascriptExecutor) driver).executeScript(JS_CLICK, choseMachineClassField);
+        ((JavascriptExecutor) driver).executeScript(JS_CLICK, chooseMachineClassField);
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(listOfMachineClass.get(0)));
         listOfMachineClass.get(0).click();
         return this;
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectMachineType() {
-        choseMachineTypeField.click();
+        chooseMachineTypeField.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(listOfMachineType.get(3)));
         listOfMachineType.get(3).click();
         return this;
@@ -187,34 +177,6 @@ public class CloudGooglePlatformPricingCalculatorPage {
                 .substring(listOfEstimate.get(6).getText().indexOf("USD") + 4, listOfEstimate.get(6).getText().indexOf("per") - 1));
         return this;
     }
-
-    // for debug
-//    public boolean listEstimateCheck() {
-//        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfAllElements(listOfEstimate));
-//        String myPrice = listOfEstimate.get(6).getText()
-//                .substring(listOfEstimate.get(6).getText().indexOf("USD") + 4, listOfEstimate.get(6).getText().indexOf("per") - 1);
-//
-//        String myInstance = listOfEstimate.get(2).getText().substring(listOfEstimate.get(2).getText().indexOf(":") + 2);
-//
-//        String myVmClass = listOfEstimate.get(1).getText().substring(listOfEstimate.get(1).getText().indexOf(":") + 2);
-//
-//        String myRegion = listOfEstimate.get(3).getText().substring(listOfEstimate.get(3).getText().indexOf(":") + 2);
-//
-//        String mySSD = listOfEstimate.get(4).getText().substring(listOfEstimate.get(4).getText().indexOf("space") + 6);
-//
-//        String myCommitmentTerm = listOfEstimate.get(5).getText().substring(listOfEstimate.get(5).getText().indexOf(":") + 2);
-//
-//        if (myVmClass.equals(EXPECTED_VM_CLASS)
-//                && myInstance.equals(EXPECTED_INSTANCE)
-//                && myRegion.equals(EXPECTED_REGION)
-//                && mySSD.equals(EXPECTED_LOCAL_SSD)
-//                && myCommitmentTerm.equals(EXPECTED_COMMITMENT_TERM)
-//                && myPrice.equals(EXPECTED_TOTAL_PRICE)) {
-//            this.checkFlag = true;
-//        }
-//        System.out.println("DEBUG check condition " + checkFlag);
-//        return checkFlag;
-//    }
 
     public CloudGooglePlatformPricingCalculatorPage clickButtonEmailEstimate() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(buttonEmailEstimate));

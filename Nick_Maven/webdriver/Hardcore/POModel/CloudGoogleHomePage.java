@@ -11,12 +11,10 @@ public class CloudGoogleHomePage {
     public static final int WAIT_TIMEOUT_SECONDS = 10;
     public static String TEXT_FOR_SEARCH;
 
+    @FindBy(xpath = "//*[contains(@class,'devsite-suggest-all-results')]")
+    private WebElement chooseSearchBtn;
 
-
-    @FindBy(xpath = "//*[@class='button button-white devsite-suggest-all-results']")
-    private WebElement choseSearchBtn;
-
-    @FindBy(xpath = "//input[@class='devsite-search-field devsite-search-query']")
+    @FindBy(xpath = "//*[(contains(@class,'devsite-search-query'))]")
     private WebElement searchField;
 
     public CloudGoogleHomePage(WebDriver driver) {
@@ -32,7 +30,7 @@ public class CloudGoogleHomePage {
     public CloudGoogleSearchPage makeSearch(String searchText) {
         TEXT_FOR_SEARCH = searchText;
         searchField.sendKeys(searchText);
-        choseSearchBtn.click();
+        chooseSearchBtn.click();
         return new CloudGoogleSearchPage(driver);
     }
 }

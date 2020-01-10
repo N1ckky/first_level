@@ -14,6 +14,7 @@ public class CloudGooglePlatformPricingCalculatorPage {
     private WebDriver driver;
     public static final int WAIT_TIMEOUT_SECONDS = 10;
     private boolean checkFlag = false;
+    private static final String JS_CLICK = "arguments[0].click();";
 
     private static final String EXPECTED_VM_CLASS = "regular";
     private static final String EXPECTED_INSTANCE = "n1-standard-8";
@@ -22,26 +23,26 @@ public class CloudGooglePlatformPricingCalculatorPage {
     private static final String EXPECTED_COMMITMENT_TERM = "1 Year";
     private static final String EXPECTED_TOTAL_PRICE = "1,082.77";
 
-    @FindBy(xpath = "//*[@class='presets-buttons layout-sm-column layout-align-center-center layout-column']")
+    @FindBy(xpath = "//*[contains(@class,'presets-buttons')]")
     private List<WebElement> computeEngineSection;
 
     @FindBy(xpath = "//input[@name='quantity' and @ng-model='listingCtrl.computeServer.quantity']")
     private WebElement numberOfInstancesField;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_47']")
-    private WebElement choseOSAndSoftwareField;
+    private WebElement chooseOSAndSoftwareField;
 
     @FindBy(xpath = "//div[@id='select_container_67']//child::md-option")
     private List<WebElement> listOfOSAndSoftware;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_48']")
-    private WebElement choseMachineClassField;
+    private WebElement chooseMachineClassField;
 
     @FindBy(xpath = "//div[@id='select_container_71']//child::md-option")
     private List<WebElement> listOfMachineClass;
 
     @FindBy(xpath = "//*[@class='md-select-value' and @id='select_value_label_51']")
-    private WebElement choseMachineTypeField;
+    private WebElement chooseMachineTypeField;
 
     @FindBy(xpath = "//md-optgroup[@label='standard']//child::md-option")
     private List<WebElement> listOfMachineType;
@@ -85,8 +86,6 @@ public class CloudGooglePlatformPricingCalculatorPage {
     @FindBy(xpath = "//md-card-content[@id='resultBlock']//child::md-list-item")
     private List<WebElement> listOfEstimate;
 
-    private static final String JS_CLICK = "arguments[0].click();";
-
     CloudGooglePlatformPricingCalculatorPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -104,21 +103,21 @@ public class CloudGooglePlatformPricingCalculatorPage {
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectOSAndSoftware() {
-        choseOSAndSoftwareField.click();
+        chooseOSAndSoftwareField.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(listOfOSAndSoftware.get(0)));
         listOfOSAndSoftware.get(0).click();
         return this;
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectMachineClass() {
-        choseMachineClassField.click();
+        chooseMachineClassField.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(listOfMachineClass.get(0)));
         listOfMachineClass.get(0).click();
         return this;
     }
 
     public CloudGooglePlatformPricingCalculatorPage selectMachineType() {
-        choseMachineTypeField.click();
+        chooseMachineTypeField.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(listOfMachineType.get(3)));
         listOfMachineType.get(3).click();
         return this;
