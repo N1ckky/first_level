@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="YandexDisc" verbose="1" >
+    <test name="CreateFolderAndWordFileTest"   >
+        <classes>
+            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.CreateFolderAndWordFileTest" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="YandexDisc" verbose="1" >
+    <test name="AllInOneTest"   >
+        <classes>
+            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.AllInOneTest" />
+        </classes>
+    </test>
+</suite>
