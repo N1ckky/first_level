@@ -1,25 +1,14 @@
 package Nick_Maven.WebdriverAdv.Yandex.POModel;
 
 import Nick_Maven.WebdriverAdv.Yandex.model.User;
-import Nick_Maven.WebdriverAdv.CustomConditions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class YandexDiskLoginPage {
-    private WebDriver driver;
-    public static final String HOMEPAGE_URL = "https://disk.yandex.by/";
-    public static final int WAIT_TIMEOUT_SECONDS = 10;
+public class YandexDiskLoginPage extends AbstractPage{
 
-    public YandexDiskLoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public YandexDiskLoginPage openPage() {
-        driver.get(HOMEPAGE_URL);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
-        return this;
+    public YandexDiskLoginPage() {
+        super();
     }
 
     public NavigationBlockPage userLogin(User user) {
@@ -38,6 +27,6 @@ public class YandexDiskLoginPage {
         driver.findElement(By.xpath(buttonSubmit)).click();
         System.out.println("Successful log in");
 
-        return new NavigationBlockPage(driver);
+        return new NavigationBlockPage();
     }
 }

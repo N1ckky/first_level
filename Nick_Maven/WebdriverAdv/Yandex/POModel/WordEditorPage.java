@@ -6,17 +6,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WordEditorPage {
-    private WebDriver driver;
+public class WordEditorPage extends AbstractPage{
     private Actions actions;
-    public static final int WAIT_TIMEOUT_SECONDS = 10;
-    private static final String textSendingToWordEditor = "Hello Word Editor! It's like in desktop MS Office =)";
-    public static boolean checkTextInTheWordDocument;
+    public static final String textSendingToWordEditor = "Hello Word Editor! It's like in desktop MS Office =)";
     private static final String wordFileName = "wordFileName";
 
 
-    public WordEditorPage(WebDriver driver) {
-        this.driver = driver;
+    public WordEditorPage() {
+        super();
         actions = new Actions(driver);
     }
 
@@ -51,36 +48,5 @@ public class WordEditorPage {
         return this;
     }
 
-    protected String getValue(WebElement element) {
-        try {
-            String value = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent;", element);
-            return value;
-        } catch (Exception e) {
-            return "can't get text";
-        }
-    }
 
-    public WordEditorPage checkTextInWordEditor() {
-        driver.navigate().refresh();
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jQueryAJAXCallsHaveCompleted());
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
-        driver.switchTo().frame(0);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jQueryAJAXCallsHaveCompleted());
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
-
-        String editorFieldId = "WACViewPanel_EditingElement";
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(By.id(editorFieldId)));
-
-        String textFromEditor = getValue(driver.findElement(By.id(editorFieldId)));
-        if (textFromEditor.contains("’")) {
-            textFromEditor = (textFromEditor.substring(1, textFromEditor.length() - 1)).replace('’', '\'');
-        } else textFromEditor = (textFromEditor.substring(1, textFromEditor.length() - 1));
-        System.out.println("!!!");
-        System.out.println(textSendingToWordEditor);
-        System.out.println(textFromEditor);
-        System.out.println("!!!");
-        checkTextInTheWordDocument = textSendingToWordEditor.equals(textFromEditor);
-        System.out.println("Sended text and text from word are equals: " + checkTextInTheWordDocument);
-        return this;
-    }
 }

@@ -1,41 +1,24 @@
 package Nick_Maven.WebdriverAdv.Yandex.Test;
 
-import Nick_Maven.WebdriverAdv.Yandex.POModel.*;
-import Nick_Maven.WebdriverAdv.Yandex.model.User;
-import Nick_Maven.WebdriverAdv.Yandex.service.UserCreator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import Nick_Maven.WebdriverAdv.Yandex.POModel.NavigationBlockPage;
+import Nick_Maven.WebdriverAdv.Yandex.POModel.WordEditorPage;
+import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage;
+import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskLoginPage;
+import Nick_Maven.WebdriverAdv.Yandex.service.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import static Nick_Maven.WebdriverAdv.Yandex.service.YandexDiscService.checkFolderName;
 
-import static Nick_Maven.WebdriverAdv.Yandex.POModel.NavigationBlockPage.navigationBlockTitlesAsExpected;
-import static Nick_Maven.WebdriverAdv.Yandex.POModel.WordEditorPage.checkTextInTheWordDocument;
-import static Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage.checkFolderName;
-import static Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage.checkWordFileExist;
-
-public class AllInOneTest {
-    private WebDriver driver;
-    public static final int WAIT_TIMEOUT_SECONDS = 10;
-
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup() {
-        driver = new ChromeDriver();
-    }
-
+public class AllInOneTest extends CommonConditions{
     @Test(description = "Nav Bar test")
     public void yandexDiscAllTests() {
-        ArrayList<String> tempList = new ArrayList<>();
-        BrowserParams browser = new BrowserParams(driver);
-        User testUser = UserCreator.withCredentialsFromProperty();
+        BrowserParamsService browser = new BrowserParamsService();
 
         System.out.println("---Starts nav bar test");
-        NavigationBlockPage navigationBlockPage = new YandexDiskLoginPage(driver)
-                .openPage()
-                .userLogin(testUser)
+        NavigationBlockPage navigationBlockPage = new YandexDiskLoginPage()
+                .userLogin(UserCreator.withCredentialsFromProperty())
                 .checkLastFilesBlock()
                 .checkFilesBlock()
                 .checkFotoBlock()
@@ -43,45 +26,40 @@ public class AllInOneTest {
                 .checkSharedBlock()
                 .checkHistoryBlock()
                 .checkArchiveBlock()
-                .checkGarbageBlock()
-                .titleComparisonBlock();
-        Assert.assertTrue(navigationBlockTitlesAsExpected);
+                .checkGarbageBlock();
         System.out.println("+++Completed nav bar test");
 
         System.out.println("---Starts create folder and word file test");
         navigationBlockPage
                 .checkFilesBlock();
-        YandexDiskFilesPage yandexDiskFilesPage = new YandexDiskFilesPage(driver)
+        YandexDiskFilesPage yandexDiskFilesPage = new YandexDiskFilesPage()
                 .openContextMenu()
                 .createNewFolder()
                 .setNewFolderName()
                 .openCreatedFolder()
                 .openContextMenu();
-        WordEditorPage wordEditorPage = new YandexDiskFilesPage(driver)
+        WordEditorPage wordEditorPage = new YandexDiskFilesPage()
                 .createWordFile();
         browser
                 .getAllOppenedTabs()
-                .switchFirstTab();
+                .switchTab(1);
         wordEditorPage
                 .sendTextToWordEditor()
                 .setWordFileName();
         browser
-                .switchZeroTab();
+                .switchTab(0);
         yandexDiskFilesPage
                 .checkWordFile();
         browser
                 .getAllOppenedTabs()
-                .switchSecondTab();
-        wordEditorPage
-                .checkTextInWordEditor();
+                .switchTab(2);
 
-        Assert.assertTrue(checkFolderName);
-        Assert.assertTrue(checkWordFileExist);
-        Assert.assertTrue(checkTextInTheWordDocument);
+        Assert.assertTrue(checkFolderName());
+        Assert.assertTrue(WordOnlineService.checkTextInTheWordDocument);
         System.out.println("+++Completed create folder and word file test");
 
         System.out.println("---Starts garbage test");
-        browser.switchZeroTab();
+        browser.switchTab(0);
         navigationBlockPage
                 .checkFilesBlock();
         yandexDiskFilesPage
@@ -89,22 +67,23 @@ public class AllInOneTest {
                 .selectWordFile()
                 .deleteWordFile();
 
-        Assert.assertFalse(yandexDiskFilesPage.checkFileNotInFilesFolder());
+        Assert.assertFalse(YandexDiscService.checkFileNotInFilesFolder());
         navigationBlockPage
                 .checkGarbageBlock();
 
-        Assert.assertTrue(yandexDiskFilesPage.checkFileIsInGarbage());
+        Assert.assertTrue(YandexDiscService.checkFileIsInGarbage());
 
         yandexDiskFilesPage
                 .clearGarbage();
 
-        Assert.assertFalse(yandexDiskFilesPage.checkFileNotInGarbage());
+        Assert.assertFalse(YandexDiscService.checkFileNotInGarbage());
 
         System.out.println("+++Completed garbage test");
     }
 
     @AfterMethod(alwaysRun = true)
     public void browserQuit() {
+        driver = DriverService.getDriver();
         driver.quit();
         driver = null;
     }

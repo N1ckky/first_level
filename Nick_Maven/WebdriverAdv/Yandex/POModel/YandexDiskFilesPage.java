@@ -3,7 +3,6 @@ package Nick_Maven.WebdriverAdv.Yandex.POModel;
 import Nick_Maven.WebdriverAdv.CustomConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,19 +10,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static Nick_Maven.WebdriverAdv.Yandex.service.RandomStringGenerator.randomStringGenerator;
 
-public class YandexDiskFilesPage {
-    private WebDriver driver;
+public class YandexDiskFilesPage extends AbstractPage {
     private Actions actions;
-    public static final int WAIT_TIMEOUT_SECONDS = 10;
-    private static String folderName;
-    public static boolean checkFolderName;
-    public static boolean checkWordFileExist;
+    public static String folderName;
+    public static String realFolderName;
     private static final String wordFileName = "wordFileName";
-    private static final String FILE_LOCATOR_PATTERN = String.format("//*[@class='clamped-text' and contains(text(),'%s')]", wordFileName);
+    public static final String FILE_LOCATOR_PATTERN = String.format("//*[@class='clamped-text' and contains(text(),'%s')]", wordFileName);
 
 
-    public YandexDiskFilesPage(WebDriver driver) {
-        this.driver = driver;
+    public YandexDiskFilesPage() {
+        super();
         actions = new Actions(driver);
     }
 
@@ -50,7 +46,7 @@ public class YandexDiskFilesPage {
         actions.moveToElement(driver.findElement(By.xpath(nameField))).click().sendKeys(folderName).build().perform();
         String confirmButton = "//*[contains(@class,'confirmation-dialog__button_submit')]";
         driver.findElement(By.xpath(confirmButton)).click();
-        System.out.println("Folder with name: "+folderName+" is created");
+        System.out.println("Folder with name: " + folderName + " is created");
         return this;
     }
 
@@ -59,8 +55,8 @@ public class YandexDiskFilesPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(nameField)));
         actions.moveToElement(driver.findElement(By.xpath(nameField))).doubleClick().build().perform();
         String realFolderTitleLocator = String.format("//*[@title='%s']", folderName);
-        String realFolderName = driver.findElement(By.xpath(realFolderTitleLocator)).getText();
-        checkFolderName = folderName.equals(realFolderName);
+        realFolderName = driver.findElement(By.xpath(realFolderTitleLocator)).getText();
+
         return this;
     }
 
@@ -74,21 +70,18 @@ public class YandexDiskFilesPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(newWordFileField)));
         driver.findElement(By.xpath(newWordFileField)).click();
         System.out.println("Word file created");
-        return new WordEditorPage(driver);
+        return new WordEditorPage();
     }
 
     public WordEditorPage checkWordFile() {
-        driver.navigate().refresh();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(CustomConditions.jQueryAJAXCallsHaveCompleted());
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
         String searchWordFileLocator = FILE_LOCATOR_PATTERN;
-        checkWordFileExist = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator))).isDisplayed();
-        System.out.println("Is the Word file exist: "+checkWordFileExist);
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator)));
         actions.moveToElement(driver.findElement(By.xpath(searchWordFileLocator))).doubleClick().build().perform();
-        System.out.println("Word file: "+wordFileName+" oppened");
-        return new WordEditorPage(driver);
+        System.out.println("Word file: " + wordFileName + " oppened");
+        return new WordEditorPage();
     }
 
     public YandexDiskFilesPage selectWordFile() {
@@ -96,9 +89,9 @@ public class YandexDiskFilesPage {
                 .until(CustomConditions.jQueryAJAXCallsHaveCompleted());
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
         String searchWordFileLocator = FILE_LOCATOR_PATTERN;
-        checkWordFileExist = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator))).isDisplayed();
-        System.out.println("Searching word file is exist: "+checkWordFileExist);
-        return new YandexDiskFilesPage(driver);
+        System.out.println("Searching word file is exist: " + new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator))).isDisplayed());
+        return new YandexDiskFilesPage();
     }
 
     public YandexDiskFilesPage deleteWordFile() {
@@ -106,35 +99,7 @@ public class YandexDiskFilesPage {
                 "//ancestor::div[contains(@class,'listing-item_type_file')]//child::img", wordFileName);
         String garbageLocator = "//*[@title='Корзина']";
         actions.moveToElement(driver.findElement(By.xpath(searchWordFileLocator))).clickAndHold().moveToElement(driver.findElement(By.xpath(garbageLocator))).release().build().perform();
-        return new YandexDiskFilesPage(driver);
-    }
-
-    public boolean checkFileNotInFilesFolder() {
-        String searchWordFileLocator = FILE_LOCATOR_PATTERN;
-        return checkerFileInCurrentFolder(searchWordFileLocator, "FILES");
-    }
-
-    public boolean checkFileIsInGarbage() {
-        String searchWordFileLocator = FILE_LOCATOR_PATTERN;
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator)));
-        return checkerFileInCurrentFolder(searchWordFileLocator, "GARBAGE");
-    }
-
-    public boolean checkFileNotInGarbage() {
-        String searchWordFileLocator = FILE_LOCATOR_PATTERN;
-        return checkerFileInCurrentFolder(searchWordFileLocator, "GARBAGE");
-    }
-
-    private boolean checkerFileInCurrentFolder(String searchWordFileLocator, String folderTitle) {
-        String setFolderName = String.format("File in %s folder: ", folderTitle);
-        try {
-            driver.findElement(By.xpath(searchWordFileLocator));
-            System.out.println(setFolderName + true);
-            return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println(setFolderName + false);
-            return false;
-        }
+        return new YandexDiskFilesPage();
     }
 
     public YandexDiskFilesPage clearGarbage() {
@@ -151,6 +116,6 @@ public class YandexDiskFilesPage {
         driver.navigate().refresh();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(CustomConditions.jQueryAJAXCallsHaveCompleted());
-        return new YandexDiskFilesPage(driver);
+        return new YandexDiskFilesPage();
     }
 }
