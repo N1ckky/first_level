@@ -1,7 +1,7 @@
 package Nick_Maven.WebdriverAdv.Yandex.service;
 
 import Nick_Maven.WebdriverAdv.CustomConditions;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.WordEditorPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.WordEditorPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -40,10 +40,10 @@ public class WordOnlineService {
             textFromEditor = (textFromEditor.substring(1, textFromEditor.length() - 1)).replace('’', '\'');
         } else textFromEditor = (textFromEditor.substring(1, textFromEditor.length() - 1));
         System.out.println("!!!");
-        System.out.println(WordEditorPage.textSendingToWordEditor);
+        System.out.println(WordEditorPage.TEXT_SENDING_TO_WORD_EDITOR);
         System.out.println(textFromEditor);
         System.out.println("!!!");
-        checkTextInTheWordDocument = WordEditorPage.textSendingToWordEditor.equals(textFromEditor);
+        checkTextInTheWordDocument = WordEditorPage.TEXT_SENDING_TO_WORD_EDITOR.equals(textFromEditor);
         System.out.println("Sended text and text from word are equals: " + checkTextInTheWordDocument);
         return checkTextInTheWordDocument;
     }

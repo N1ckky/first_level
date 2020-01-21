@@ -1,4 +1,4 @@
-package Nick_Maven.WebdriverAdv.Yandex.POModel;
+package Nick_Maven.WebdriverAdv.Yandex.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;

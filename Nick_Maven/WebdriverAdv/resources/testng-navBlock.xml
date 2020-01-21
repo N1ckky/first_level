@@ -3,7 +3,7 @@
 <suite name="YandexDisc" verbose="1" >
     <test name="NavigationBlockTest"   >
         <classes>
-            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.NavigationBlockTest" />
+            <class name="Nick_Maven.WebdriverAdv.Yandex.tests.NavigationBlockTest" />
         </classes>
     </test>
 </suite>

@@ -1,9 +1,9 @@
-package Nick_Maven.WebdriverAdv.Yandex.Test;
+package Nick_Maven.WebdriverAdv.Yandex.tests;
 
-import Nick_Maven.WebdriverAdv.Yandex.POModel.NavigationBlockPage;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.WordEditorPage;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskLoginPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.NavigationBlockPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.WordEditorPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.YandexDiskFilesPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.YandexDiskLoginPage;
 import Nick_Maven.WebdriverAdv.Yandex.service.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -68,8 +68,8 @@ public class YandexDiscTests extends CommonConditions {
         browserParamsService
                 .switchTab(0);
 
-        SoftAssert asert=new SoftAssert();
-        asert.assertTrue(YandexDiscService.checkIsWordFileExist());
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertTrue(YandexDiscService.checkIsWordFileExist());
 
         filesPage
                 .checkWordFile();
@@ -78,7 +78,8 @@ public class YandexDiscTests extends CommonConditions {
                 .getAllOppenedTabs()
                 .switchTab(2);
 
-        asert.assertTrue(WordOnlineService.checkTextInWordEditor());
+        softAssert.assertTrue(WordOnlineService.checkTextInWordEditor());
+        softAssert.assertAll();
     }
 
     @Test(priority = 4, description = "Yandex disc garbage test")
@@ -93,18 +94,19 @@ public class YandexDiscTests extends CommonConditions {
                 .openCreatedFolder()
                 .selectWordFile()
                 .deleteWordFile();
-        SoftAssert asert=new SoftAssert();
-        asert.assertFalse(YandexDiscService.checkFileNotInFilesFolder());
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertFalse(YandexDiscService.checkFileNotInFilesFolder());
 
         filesBlock
                 .checkGarbageBlock();
 
-        asert.assertTrue(YandexDiscService.checkFileIsInGarbage());
+        softAssert.assertTrue(YandexDiscService.checkFileIsInGarbage());
 
         filesPage
                 .clearGarbage()
         ;
-        asert.assertFalse(YandexDiscService.checkFileNotInGarbage());
+        softAssert.assertFalse(YandexDiscService.checkFileNotInGarbage());
+        softAssert.assertAll();
         driverQuit();
     }
 }

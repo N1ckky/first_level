@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage.*;
+import static Nick_Maven.WebdriverAdv.Yandex.pages.YandexDiskFilesPage.*;
 
 public class YandexDiscService {
     protected static WebDriver driver;

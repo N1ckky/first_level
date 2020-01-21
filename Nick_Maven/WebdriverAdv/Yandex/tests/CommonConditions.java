@@ -1,4 +1,4 @@
-package Nick_Maven.WebdriverAdv.Yandex.Test;
+package Nick_Maven.WebdriverAdv.Yandex.tests;
 
 import Nick_Maven.WebdriverAdv.Yandex.service.DriverService;
 import org.openqa.selenium.WebDriver;

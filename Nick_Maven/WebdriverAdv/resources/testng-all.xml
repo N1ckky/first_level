@@ -3,7 +3,7 @@
 <suite name="YandexDisc" verbose="1" >
     <test name="AllInOneTest"   >
         <classes>
-            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.AllInOneTest" />
+            <class name="Nick_Maven.WebdriverAdv.Yandex.tests.YandexDiscTests" />
         </classes>
     </test>
 </suite>

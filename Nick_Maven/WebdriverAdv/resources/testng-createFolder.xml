@@ -3,7 +3,7 @@
 <suite name="YandexDisc" verbose="1" >
     <test name="CreateFolderTest"   >
         <classes>
-            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.CreateFolderTest" />
+            <class name="Nick_Maven.WebdriverAdv.Yandex.tests.CreateFolderTest" />
         </classes>
     </test>
 </suite>

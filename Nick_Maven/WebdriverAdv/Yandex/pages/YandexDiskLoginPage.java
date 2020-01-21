@@ -1,4 +1,4 @@
-package Nick_Maven.WebdriverAdv.Yandex.POModel;
+package Nick_Maven.WebdriverAdv.Yandex.pages;
 
 import Nick_Maven.WebdriverAdv.Yandex.model.User;
 import org.openqa.selenium.By;

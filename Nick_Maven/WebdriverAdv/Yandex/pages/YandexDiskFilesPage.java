@@ -1,4 +1,4 @@
-package Nick_Maven.WebdriverAdv.Yandex.POModel;
+package Nick_Maven.WebdriverAdv.Yandex.pages;
 
 import Nick_Maven.WebdriverAdv.CustomConditions;
 import org.openqa.selenium.By;
@@ -14,8 +14,8 @@ public class YandexDiskFilesPage extends AbstractPage {
     private Actions actions;
     public static String folderName;
     public static String realFolderName;
-    private static final String wordFileName = "wordFileName";
-    public static final String FILE_LOCATOR_PATTERN = String.format("//*[@class='clamped-text' and contains(text(),'%s')]", wordFileName);
+    private static final String WORD_FILE_NAME = "wordFileName";
+    public static final String FILE_LOCATOR_PATTERN = String.format("//*[@class='clamped-text' and contains(text(),'%s')]", WORD_FILE_NAME);
 
 
     public YandexDiskFilesPage() {
@@ -80,7 +80,7 @@ public class YandexDiskFilesPage extends AbstractPage {
         String searchWordFileLocator = FILE_LOCATOR_PATTERN;
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(By.xpath(searchWordFileLocator)));
         actions.moveToElement(driver.findElement(By.xpath(searchWordFileLocator))).doubleClick().build().perform();
-        System.out.println("Word file: " + wordFileName + " oppened");
+        System.out.println("Word file: " + WORD_FILE_NAME + " oppened");
         return new WordEditorPage();
     }
 
@@ -96,7 +96,7 @@ public class YandexDiskFilesPage extends AbstractPage {
 
     public YandexDiskFilesPage deleteWordFile() {
         String searchWordFileLocator = String.format("//*[@class='clamped-text' and contains(text(),'%s')]" +
-                "//ancestor::div[contains(@class,'listing-item_type_file')]//child::img", wordFileName);
+                "//ancestor::div[contains(@class,'listing-item_type_file')]//child::img", WORD_FILE_NAME);
         String garbageLocator = "//*[@title='Корзина']";
         actions.moveToElement(driver.findElement(By.xpath(searchWordFileLocator))).clickAndHold().moveToElement(driver.findElement(By.xpath(garbageLocator))).release().build().perform();
         return new YandexDiskFilesPage();

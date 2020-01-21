@@ -1,6 +1,6 @@
 package Nick_Maven.WebdriverAdv.Yandex.service;
 
-import Nick_Maven.WebdriverAdv.Yandex.POModel.NavigationBlockPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.NavigationBlockPage;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class NavigationBlockService {
     private static final String EXPECTED_GARBAGE_TAG = "Корзина";
 
     public static boolean titlesComparisonInNavBlock() {
-        boolean navigationBlockTitlesAsExpected = false;
+        boolean navigationBlockTitlesAsExpected;
         ArrayList<String> expectedTitlesOfBlock = new ArrayList<>();
         expectedTitlesOfBlock.add(EXPECTED_LAST_FILES_TAG);
         expectedTitlesOfBlock.add(EXPECTED_FILES_TAG);
@@ -29,5 +29,4 @@ public class NavigationBlockService {
         System.out.println("All navigation titles are as expected: " + navigationBlockTitlesAsExpected);
         return navigationBlockTitlesAsExpected;
     }
-
 }

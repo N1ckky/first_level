@@ -1,4 +1,4 @@
-package Nick_Maven.WebdriverAdv.Yandex.POModel;
+package Nick_Maven.WebdriverAdv.Yandex.pages;
 
 import Nick_Maven.WebdriverAdv.CustomConditions;
 import org.openqa.selenium.*;
@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WordEditorPage extends AbstractPage{
     private Actions actions;
-    public static final String textSendingToWordEditor = "Hello Word Editor! It's like in desktop MS Office =)";
-    private static final String wordFileName = "wordFileName";
+    public static final String TEXT_SENDING_TO_WORD_EDITOR = "Hello Word Editor! It's like in desktop MS Office =)";
+    private static final String WORD_FILE_NAME = "wordFileName";
 
 
     public WordEditorPage() {
@@ -22,7 +22,7 @@ public class WordEditorPage extends AbstractPage{
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jQueryAJAXCallsHaveCompleted());
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
         String editorFieldId = "//*[@id='WACViewPanel_EditingElement']";
-        driver.findElement(By.xpath(editorFieldId)).sendKeys(textSendingToWordEditor);
+        driver.findElement(By.xpath(editorFieldId)).sendKeys(TEXT_SENDING_TO_WORD_EDITOR);
         System.out.println("Text to word sended");
         return this;
     }
@@ -41,12 +41,9 @@ public class WordEditorPage extends AbstractPage{
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(CustomConditions.jsReadyStateCompleted());
         String fileNameField = "//*[@id='txtDocumentName']";
         driver.findElement(By.xpath(fileNameField)).sendKeys(Keys.CONTROL, "a", Keys.DELETE);
-        driver.switchTo().activeElement().sendKeys(wordFileName);
+        driver.switchTo().activeElement().sendKeys(WORD_FILE_NAME);
         String okButton = "//*[@id='WACDialogActionButton']";
         driver.findElement(By.xpath(okButton)).click();
-        System.out.println("Word file name edited. Name is: " + wordFileName);
         return this;
     }
-
-
 }

@@ -3,7 +3,7 @@
 <suite name="YandexDisc" verbose="1" >
     <test name="GarbageTest"   >
         <classes>
-            <class name="Nick_Maven.WebdriverAdv.Yandex.Test.GarbageTest" />
+            <class name="Nick_Maven.WebdriverAdv.Yandex.tests.GarbageTest" />
         </classes>
     </test>
 </suite>

@@ -1,8 +1,8 @@
-package Nick_Maven.WebdriverAdv.Yandex.Test;
+package Nick_Maven.WebdriverAdv.Yandex.tests;
 
-import Nick_Maven.WebdriverAdv.Yandex.POModel.NavigationBlockPage;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskFilesPage;
-import Nick_Maven.WebdriverAdv.Yandex.POModel.YandexDiskLoginPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.NavigationBlockPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.YandexDiskFilesPage;
+import Nick_Maven.WebdriverAdv.Yandex.pages.YandexDiskLoginPage;
 import Nick_Maven.WebdriverAdv.Yandex.service.DriverService;
 import Nick_Maven.WebdriverAdv.Yandex.service.UserCreator;
 import Nick_Maven.WebdriverAdv.Yandex.service.YandexDiscService;
